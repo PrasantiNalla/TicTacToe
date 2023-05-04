@@ -61,7 +61,6 @@ export const TicTacToe: React.FunctionComponent = () => {
             [0, 4, 8],
             [2, 4, 6]
             ];
-
             possibleWins.forEach(win => {
                 const [a, b, c] = win;
                 if (board[a] === winner && board[b] === winner && board[c] === winner) {
