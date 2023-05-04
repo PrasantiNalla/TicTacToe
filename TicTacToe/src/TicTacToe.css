@@ -1,6 +1,6 @@
 h1 {
     text-align: center;
-    font-size: 50px;
+    font-size: 45px;
     color: rgb(152, 110, 192);
     text-shadow: 0px 0px 20px rgb(152, 110, 192);
 }
@@ -23,6 +23,7 @@ h2 {
     border-radius: 18px;
     transition: .2s;
     box-shadow: 0px 0px 20px rgb(140, 208, 218);
+
 }
 
 .board-o {
@@ -34,11 +35,12 @@ h2 {
 
 .board-button.x {
     color: rgb(140, 208, 218);
-
+    text-shadow: 0px 0px 20px rgb(140, 208, 218);
 }
 
 .board-button.o {
     color: rgb(201, 187, 139);
+    text-shadow: 0px 0px 20px rgb(201, 187, 139);
 }
 
 .board-rows {
@@ -60,14 +62,21 @@ h2 {
     transition: .2s;
     border-width: 2px;
     border-color: rgb(163, 147, 177);
+    box-shadow: 0px 0px 20px rgb(163, 147, 177);
+
 
 }
 
-.winning-button {
-    box-shadow: 0px 0px 20px rgb(220, 154, 227) inset;
-    text-shadow: 0px 0px 20px rgb(220, 154, 227);
+.winning-button.x {
+    box-shadow: 0px 0px 20px rgb(140, 208, 218) inset;
+    /* text-shadow: 0px 0px 20px rgb(140, 208, 218); */
+
 }
 
+.winning-button.o {
+    box-shadow: 0px 0px 20px rgb(201, 187, 139) inset;
+    /* text-shadow: 0px 0px 20px rgb(201, 187, 139); */
+}
 
 #b1 {
     border-radius: 20px 0 0 0;
@@ -94,6 +103,7 @@ h2 {
     border-radius: 10px;
     background-color: white;
     color: rgb(134, 83, 182);
+    border: none;
     box-shadow: 0px 0px 20px rgb(134, 83, 182);
 }
 

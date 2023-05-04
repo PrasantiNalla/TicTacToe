@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './TicTacToe.css';
 
 export const TicTacToe: React.FunctionComponent = () => {
@@ -22,19 +22,37 @@ export const TicTacToe: React.FunctionComponent = () => {
         buttons.forEach(button => button.classList.remove('winning-button'));
     }
 
-    const handleClick = (index: number) => {
+    function handleClick(index: number) {
         if (board[index] || winner) return;
         const newBoard = Array.from(board);
         newBoard[index] = turn;
         setBoard(newBoard);
         setTurn(turn === 'X' ? 'O' : 'X');
-        checkWinner(newBoard, index);
-
+        checkWinner(newBoard);
     }
 
-    const checkWinner = (currentBoard: string[], lastClickedIndex: number) => {
-        const possibleWins = [
-            [0, 1, 2],
+    function checkWinner(currentBoard: string[]) {
+        const possibleWins = [[0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+        ];
+
+        possibleWins.forEach(win => {
+            const [a, b, c] = win;
+            if (currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a] === currentBoard[c]) {
+                setWinner(currentBoard[a]);
+            }
+        });
+    }
+
+    useEffect(() => {
+        if (winner) {
+            const possibleWins = [[0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
             [0, 3, 6],
@@ -42,17 +60,20 @@ export const TicTacToe: React.FunctionComponent = () => {
             [2, 5, 8],
             [0, 4, 8],
             [2, 4, 6]
-        ];
+            ];
 
-        possibleWins.forEach(win => {
-            const [a, b, c] = win;
-            if (currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a] === currentBoard[c]) {
-                setWinner(currentBoard[a]);
-                const winningButtons = Array.from(document.querySelectorAll(`#b${a + 1}, #b${b + 1}, #b${c + 1}`));
-                winningButtons.forEach(button => button.classList.add('winning-button'));
-            }
-        });
-    }
+            possibleWins.forEach(win => {
+                const [a, b, c] = win;
+                if (board[a] === winner && board[b] === winner && board[c] === winner) {
+                    const winningButtons = Array.from(document.querySelectorAll(`#b${a + 1}, #b${b + 1}, #b${c + 1}`));
+                    winningButtons.forEach(button => button.classList.add('winning-button'));
+                }
+            });
+        }
+    }, [winner]);
+
+
+
 
     return (
         <div id="board" className="board">
@@ -70,7 +91,6 @@ export const TicTacToe: React.FunctionComponent = () => {
                     <button id="b4" className={`board-button ${board[3] ? board[3].toLowerCase() : 'board-button'}`}
                         onClick={() => handleClick(3)}>{board[3]}</button>
                     <button id="b5" className={`board-button ${board[4] ? board[4].toLowerCase() : 'board-button'}`}
-
                         onClick={() => handleClick(4)}>{board[4]}</button>
                     <button id="b6" className={`board-button ${board[5] ? board[5].toLowerCase() : 'board-button'}`}
                         onClick={() => handleClick(5)}>{board[5]}</button>
